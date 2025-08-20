@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>667desci Project - A Bridge Built by Science & Transparency</title>
+  <style>
+    :root{
+      --bg-deep-1:#0a0a2e;
+      --bg-deep-2:#16213e;
+      --bg-deep-3:#1a1a3e;
+      --accent:#40e0d0;
+      --accent-2:#20b2aa;
+      --ink-1:#0f172a;
+      --ink-2:#334155;
+      --ink-3:#64748b;
+      --card:#ffffff;
+      --soft:#f6f7fb;
+      --soft-2:#eef2f7;
+      --muted-blue:#f3f8ff;
+      --muted-ice:#eef9f8;
+      --legend-bg:#f7fbff;
+      --purple-1:#667eea;
+      --purple-2:#764ba2;
+      --blue-market:#0f172a;
+      --blue-market-2:#0b2a55;
+      --blue-market-3:#1f5ca8;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      color:var(--ink-1);
+      line-height:1.65;
+      background:#fff;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Hero */
+    .hero{
+      min-height:100vh;
+      background: linear-gradient(135deg, var(--bg-deep-1) 0%, var(--bg-deep-2) 50%, var(--bg-deep-3) 100%);
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#fff;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000"><defs><radialGradient id="s" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="white" stop-opacity="1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><g fill="url(%23s)"><circle cx="80" cy="120" r="1.2"/><circle cx="220" cy="260" r="0.8"/><circle cx="340" cy="80" r="0.6"/><circle cx="520" cy="220" r="1.6"/><circle cx="700" cy="140" r="1.1"/><circle cx="880" cy="240" r="0.9"/><circle cx="160" cy="420" r="0.7"/><circle cx="820" cy="380" r="1.3"/><circle cx="420" cy="560" r="0.9"/><circle cx="600" cy="640" r="1.1"/><circle cx="120" cy="760" r="0.8"/><circle cx="860" cy="720" r="1.4"/><circle cx="320" cy="840" r="0.7"/><circle cx="740" cy="860" r="0.9"/></g></svg>') repeat;
+      animation: stars 50s linear infinite;
+      opacity:.7;
+      z-index:-1;
+    }
+    @keyframes stars{from{transform:translateY(0)} to{transform:translateY(-1000px)}}
+    .hero::after{
+      content:"";
+      position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+      width:200%; height:110px;
+      background: linear-gradient(45deg, transparent 30%, rgba(64,224,208,.30) 50%, transparent 70%);
+      animation: bridge 8s ease-in-out infinite;
+      z-index:0;
+    }
+    @keyframes bridge{0%,100%{opacity:.28; transform:translateX(-50%) scaleX(1)} 50%{opacity:.6; transform:translateX(-50%) scaleX(1.2)}}
+    .hero-content{position:relative; z-index:1; max-width:960px; padding:0 20px}
+    .hero h1{
+      font-size:3.2rem; font-weight:300; letter-spacing:.5px; margin-bottom:16px;
+      background: linear-gradient(45deg, var(--accent), #fff, var(--accent));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+    @keyframes glow{from{filter:brightness(1)} to{filter:brightness(1.15)}}
+    .hero .kicker{font-size:.95rem; letter-spacing:.25em; opacity:.95; margin-bottom:14px}
+    .hero .subtitle{font-size:1.15rem; opacity:.95; margin:0 auto 28px; line-height:1.9; max-width:800px}
+    .hero-buttons{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
+    .btn{
+      padding:12px 22px; border-radius:999px; text-decoration:none; font-weight:600; font-size:.95rem;
+      background: linear-gradient(45deg, var(--accent), var(--accent-2)); color:#fff; border:2px solid transparent;
+      transition:.25s ease; display:inline-flex; align-items:center; gap:8px
+    }
+    .btn:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(64,224,208,.35)}
+    .btn-outline{background:transparent; color:var(--accent); border-color:var(--accent)}
+    .btn-outline:hover{background:var(--accent); color:#fff}
+
+    /* sections */
+    .section{padding:92px 0}
+    .container{max-width:1200px; margin:0 auto; padding:0 20px}
+    .section-title{
+      text-align:center; font-size:2.2rem; color:#1f2937; margin-bottom:26px; font-weight:700; letter-spacing:.02em
+    }
+    .section-lead{
+      text-align:center; color:var(--ink-3); max-width:900px; margin:0 auto 36px; font-size:1.08rem
+    }
+
+    /* Mission (独立块) */
+    .mission{background:linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)}
+    .mission .quote{
+      max-width:900px; margin:12px auto 0; font-size:1.08rem; color:var(--ink-2); line-height:1.95; text-align:center
+    }
+
+    /* Science-Driven (独立块) */
+    .science{background:linear-gradient(135deg, #f8f9fb 0%, #e9eef6 100%)}
+    .science .body{max-width:980px; margin:0 auto; color:var(--ink-2); line-height:1.95; font-size:1.02rem}
+    .science .body p{margin:10px 0}
+
+    /* Market Opportunity (独立块，有交互) */
+    .market{background:linear-gradient(135deg,#f8fafc,#eef2f7)}
+    .market .title-row{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 0 14px 0}
+    .market .title{font-weight:800; letter-spacing:.02em; font-size:1.25rem; color:#0f172a}
+    .market .toggle{
+      border:1px solid #89dbe0; background:linear-gradient(135deg,#e6fffb,#f0fffe);
+      color:#0b4b50; padding:8px 14px; border-radius:999px; font-weight:700; cursor:pointer;
+      box-shadow:0 6px 16px rgba(64,224,208,.25);
+    }
+    .market .wrap{
+      position:relative; border-radius:24px; overflow:hidden; border:1px solid #e5ebf5;
+      background:#fff; min-height:420px; box-shadow:0 16px 36px rgba(0,0,0,.06);
+    }
+    .market .base{position:absolute; inset:0}
+    .market .stage{
+      position:absolute; inset:0;
+      background:linear-gradient(135deg, #0a3d62, #1f5ca8 40%, #0b2a55 100%);
+      color:#fff;
+      clip-path:inset(0 100% 0 0);
+      transition:clip-path .6s cubic-bezier(.2,.9,.2,1);
+      display:flex; align-items:center; justify-content:center; text-align:left
+    }
+    .market.open .stage{ clip-path:inset(0 0 0 0) }
+    .market .content{max-width:980px; margin:0 auto; padding:34px 24px; line-height:1.85}
+    .market .content h3{font-size:1.6rem; margin-bottom:10px; font-weight:800; letter-spacing:.01em}
+    .market .content p{opacity:.98; margin:12px 0}
+    .market .blue-badge{
+      display:inline-block; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25);
+      padding:6px 10px; border-radius:10px; font-size:.85rem; margin-bottom:8px
+    }
+    .market .handle{
+      position:absolute; top:50%; transform:translateY(-50%);
+      right:0; width:18px; height:120px; cursor:ew-resize;
+      background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
+      border-left:1px solid rgba(255,255,255,.45);
+      border-radius:8px 0 0 8px;
+      display:grid; place-items:center;
+      box-shadow:-8px 0 24px rgba(0,0,0,.18);
+      user-select:none;
+    }
+    .market .grip{width:4px; height:60px; border-radius:999px; background:rgba(13, 51, 84, .35)}
+    .market .ghost{position:absolute; inset:0; pointer-events:none; opacity:0}
+
+    /* Ocean Wave Market Opportunity */
+    .market-ocean {
+      background: linear-gradient(135deg, #f8fafc, #eef2f7);
+    }
+
+   .ocean-showcase {
+  position: relative;
+  height: 450px;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+/* 手机端让容器高度自适应内容 */
+@media (max-width: 768px) {
+  .ocean-showcase {
+    height: auto;
+    min-height: 300px;
+  }
+  
+  .ocean-showcase.revealed {
+    height: auto;
+  }
+}
+
+    .ocean-surface {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(180deg, 
+        #3498db 0%,
+        #2980b9 30%,
+        #1e6091 70%,
+        #0a4d68 100%
+      );
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .ocean-surface::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path d="M0,50 Q300,20 600,50 T1200,50 L1200,0 L0,0 Z" fill="rgba(255,255,255,0.3)"/><path d="M0,70 Q200,40 400,70 T800,70 T1200,70 L1200,0 L0,0 Z" fill="rgba(255,255,255,0.2)"/></svg>') repeat-x;
+      animation: waves 3s ease-in-out infinite;
+    }
+
+    @keyframes waves {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-100px); }
+    }
+
+   .market-content-ocean {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  background: linear-gradient(180deg, 
+    transparent 0%,
+    rgba(10, 77, 104, 0.8) 30%,
+    rgba(10, 77, 104, 0.95) 100%
+  );
+  color: #ffffff;
+  transform: translateY(100%);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 手机端改为静态布局 */
+@media (max-width: 768px) {
+  .market-content-ocean {
+    position: static;
+    transform: none;
+    background: linear-gradient(180deg, 
+      rgba(10, 77, 104, 0.95) 0%,
+      rgba(10, 77, 104, 1) 100%
+    );
+    padding: 25px 20px;
+    margin-top: 0;
+  }
+  
+  .ocean-showcase.revealed .market-content-ocean {
+    transform: none;
+  }
+}
+
+    .ocean-showcase.revealed .ocean-surface {
+      transform: translateY(-60%);
+    }
+
+    .ocean-showcase.revealed .market-content-ocean {
+      transform: translateY(0);
+    }
+
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+
+    .bubble {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .bubble:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .bubble:nth-child(2) { left: 30%; animation-delay: 1s; }
+    .bubble:nth-child(3) { left: 50%; animation-delay: 2s; }
+    .bubble:nth-child(4) { left: 70%; animation-delay: 3s; }
+    .bubble:nth-child(5) { left: 90%; animation-delay: 0.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(450px) scale(0.8); opacity: 0; }
+      50% { transform: translateY(50px) scale(1.2); opacity: 1; }
+    }
+
+    .ocean-trigger-hint {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #0a4d68;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      animation: pulse 2s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    .ocean-badge {
+      display: inline-block;
+      background: rgba(64, 224, 208, 0.2);
+      border: 1px solid rgba(64, 224, 208, 0.4);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+
+    .ocean-content h3 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .ocean-content p {
+      line-height: 1.8;
+      margin-bottom: 15px;
+      opacity: 0.98;
+    }
+
+    /* Dual-Track Strategy（独立块） */
+    .strategy{background:linear-gradient(180deg, #fff, #f5f8ff)}
+    .strategy-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center}
+    .callout{
+      margin-top:16px; border-left:4px solid var(--accent); background:linear-gradient(90deg, rgba(64,224,208,.06), rgba(64,224,208,0));
+      padding:14px 16px; border-radius:12px; color:#0f172a
+    }
+    .accordion-toggle{
+      display:inline-flex; align-items:center; gap:10px; cursor:pointer;
+      background:transparent; border:0; font-weight:700; color:var(--ink-1); padding:8px 12px; border-radius:10px;
+      transition:background .18s ease, transform .12s ease;
+    }
+    .accordion-toggle:hover{background:rgba(0,0,0,0.03); transform:translateY(-1px)}
+    .accordion-toggle .chev{display:inline-block; transform:rotate(0deg); transition:transform .25s ease; width:14px; height:14px;}
+    .accordion-toggle[aria-expanded="true"] .chev{ transform:rotate(180deg) }
+    .accordion-content{
+      overflow:hidden; max-height:0; transition:max-height .36s cubic-bezier(.2,.9,.2,1);
+      margin-top:12px; color:var(--ink-2); line-height:1.9; background:transparent;
+    }
+    .tracks{
+      position:relative; height:320px; border-radius:20px; background:linear-gradient(135deg, #eaf1fb, #f4f7fc);
+      overflow:hidden; border:1px solid #e6edf7
+    }
+    .tracks .line{position:absolute; left:40px; right:40px; height:6px; background:linear-gradient(90deg, #b9d9ff, #a7f3d0); border-radius:999px}
+    .tracks .line.top{top:110px}
+    .tracks .line.bottom{top:200px}
+    .tracks .node{
+      position:absolute; width:14px; height:14px; border-radius:50%; background:var(--accent); transform:translate(-50%,-50%);
+      box-shadow:0 0 0 6px rgba(64,224,208,.15)
+    }
+    .tracks .badge{
+      position:absolute; transform:translate(-50%, -50%); padding:10px 14px; border-radius:12px; background:#fff; border:1px solid #e6edf7;
+      box-shadow:0 8px 20px rgba(0,0,0,.06); font-weight:600; color:#0f172a; font-size:.95rem
+    }
+    .tracks .badge.cash{top:80px; right:40px; transform:none}
+    .tracks .badge.clinical{top:170px; right:40px; transform:none}
+    .tracks .label{position:absolute; font-size:.9rem; color:var(--ink-3)}
+    .tracks .label.l1{top:130px; left:40px}
+    .tracks .label.l2{top:220px; left:40px}
+
+    /* Dual-Track Exploration（独立块） */
+    .dual-path{background:linear-gradient(180deg, #fef7f7, #fff5f8)}
+    .cards2{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:22px}
+    .path-card{
+      background:linear-gradient(135deg, #ffffff 0%, #f8fbff 100%); padding:28px; border-radius:20px;
+      box-shadow:0 10px 28px rgba(0,0,0,.06); border:1px solid #ebeff5; transition:transform .25s ease, border-color .25s ease
+    }
+    .path-card:hover{transform:translateY(-4px); border-color:var(--accent)}
+    .path-card h3{font-size:1.15rem; margin-bottom:14px; color:#1f2937}
+    .path-card ul{list-style:none; color:var(--ink-3)}
+    .path-card li{margin:10px 0; padding-left:18px; position:relative}
+    .path-card li::before{
+      content:""; position:absolute; left:0; top:.75em; width:8px; height:8px; border-radius:2px;
+      background:linear-gradient(45deg, var(--accent), var(--accent-2))
+    }
+
+    /* Snapshot */
+    .snapshot{
+      background: radial-gradient(1200px 500px at 50% -20%, rgba(64,224,208,.12), transparent 60%) , linear-gradient(135deg, #0b0f24, #0f1833);
+      color:#e5e7eb; position:relative; overflow:hidden
+    }
+    .snapshot::before{
+      content:""; position:absolute; inset:-1px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="600"><g stroke="rgba(64,224,208,0.08)" stroke-width="1" fill="none"><path d="M0 60 Q200 20 400 60 T800 60 T1200 60" /><path d="M0 160 Q200 120 400 160 T800 160 T1200 160" /><path d="M0 260 Q200 220 400 260 T800 260 T1200 260" /><path d="M0 360 Q200 320 400 360 T800 360 T1200 360" /></g></svg>') center/cover no-repeat;
+      opacity:.8; pointer-events:none
+    }
+    .snapshot .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:32px}
+    .snap-card{
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px);
+      padding:24px; border-radius:18px; transition:transform .25s ease, background .25s ease; color:#e5e7eb; text-align:left
+    }
+    .snap-card:hover{transform:translateY(-4px); background:rgba(255,255,255,.10)}
+    .icon{
+      width:42px; height:42px; border-radius:10px; display:grid; place-items:center; margin-bottom:10px;
+      background:linear-gradient(135deg, rgba(64,224,208,.2), rgba(64,224,208,.05)); border:1px solid rgba(64,224,208,.25)
+    }
+    .icon svg{width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+    .snap-card h4{margin:8px 0 6px; color:#fff; font-size:1.08rem}
+    .snap-card p{color:#cbd5e1}
+
+    /* Tokenomics */
+    .tokenomics{background:linear-gradient(180deg,#f8fbff, #ffffff)}
+    .token-grid{display:grid; grid-template-columns:1fr 1.2fr; gap:40px; align-items:center; margin-top:8px}
+    .donut-wrap{display:flex; align-items:center; justify-content:center}
+    .donut{
+      width:260px; height:260px; border-radius:50%;
+      background: conic-gradient(
+        var(--accent) 0 50%,
+        var(--purple-1) 50% 70%,
+        var(--purple-2) 70% 85%,
+        var(--accent-2) 85% 100%
+      );
+      position:relative; box-shadow:0 12px 28px rgba(0,0,0,.06)
+    }
+    .donut::after{
+      content:""; position:absolute; inset:38px; background:#fff; border-radius:50%;
+      box-shadow: inset 0 0 0 1px #eef2f7
+    }
+    .legend{display:grid; grid-template-columns:1fr; gap:12px}
+    .legend-item{display:flex; align-items:center; gap:10px; background:var(--legend-bg); border:1px solid #e9eef5; padding:12px 14px; border-radius:12px}
+    .swatch{width:14px; height:14px; border-radius:3px}
+    .swatch.p1{background:var(--accent)}
+    .swatch.p2{background:var(--purple-1)}
+    .swatch.p3{background:var(--purple-2)}
+    .swatch.p4{background:var(--accent-2)}
+    .legend strong{font-weight:700; color:#0f172a}
+    .legend span{color:var(--ink-3)}
+    .token-note{margin-top:12px; display:grid; gap:10px}
+    .note{
+      border-left:4px solid var(--accent); background:linear-gradient(90deg, rgba(64,224,208,.06), rgba(64,224,208,0));
+      padding:12px 14px; border-radius:12px; color:#0f172a; border:1px solid #eaf3f1
+    }
+
+    /* Use of funds visual */
+    .funding{background:linear-gradient(135deg, #f8f9fb 0%, #e9ecef 100%) }
+    .funding-visual{display:flex; justify-content:center; margin:50px 0}
+    .funding-circle{
+      width:420px; height:420px; border-radius:50%;
+      background: linear-gradient(45deg, var(--accent), var(--accent-2));
+      position:relative; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.2rem; font-weight:700;
+      letter-spacing:.08em; text-shadow:0 1px 2px rgba(0,0,0,.2)
+    }
+    .funding-items{position:absolute; inset:0}
+    .funding-item{
+      position:absolute; min-width:120px; padding:10px 16px;
+      border-radius:999px;
+      display:flex; align-items:center; justify-content:center; text-align:center; font-size:.82rem;
+      color:#fff;
+      box-shadow:0 10px 26px rgba(0,0,0,.12);
+      border:1px solid rgba(255,255,255,.18);
+      animation: orbit 20s linear infinite;
+      will-change: transform;
+      white-space:nowrap;
+    }
+    .funding-item:nth-child(1){background:linear-gradient(135deg,#40e0d0,#20b2aa)}
+    .funding-item:nth-child(2){background:linear-gradient(135deg,#667eea,#764ba2)}
+    .funding-item:nth-child(3){background:linear-gradient(135deg,#20b2aa,#40e0d0)}
+    .funding-item:nth-child(4){background:linear-gradient(135deg,#764ba2,#667eea)}
+    .funding-item:nth-child(5){background:linear-gradient(135deg,#40e0d0,#667eea)}
+    .funding-item:nth-child(1){animation-delay:0s}
+    .funding-item:nth-child(2){animation-delay:4s}
+    .funding-item:nth-child(3){animation-delay:8s}
+    .funding-item:nth-child(4){animation-delay:12s}
+    .funding-item:nth-child(5){animation-delay:16s}
+    @keyframes orbit{from{ transform: rotate(0deg) translateX(210px) rotate(0deg) } to{ transform: rotate(360deg) translateX(210px) rotate(-360deg) }}
+
+    /* Contact */
+    .contact{background:linear-gradient(135deg, var(--muted-ice), #f1fbff); text-align:center; border-top:1px solid rgba(13,51,84,0.04)}
+    .contact-links{display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin:36px 0}
+    .contact-link{
+      padding:24px; background:linear-gradient(135deg, #ffffff 0%, #f4fbff 100%); border-radius:16px; text-decoration:none; color:#1f2937;
+      transition:.25s ease; box-shadow:0 8px 24px rgba(0,0,0,.06); border:1px solid rgba(13,51,84,0.06); display:flex; flex-direction:column; gap:6px
+    }
+    .contact-link:hover{transform:translateY(-4px); box-shadow:0 18px 38px rgba(32,178,170,.12); color:var(--accent)}
+    .contact-link .title{font-weight:700}
+    .contact-link .sub{color:var(--ink-3); font-size:.93rem}
+
+    /* Footer */
+    .footer{
+      background: linear-gradient(135deg, var(--bg-deep-1) 0%, var(--bg-deep-2) 100%);
+      color:#fff; text-align:center; padding:80px 0; position:relative; overflow:hidden
+    }
+    .footer::before{
+      content:""; position:absolute; inset:0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path d="M0,100 Q250,50 500,100 T1000,100 L1000,200 L0,200 Z" fill="rgba(64,224,208,0.1)"/></svg>') no-repeat center bottom/cover;
+      opacity:.9
+    }
+    .footer-content{position:relative; z-index:1}
+    .footer h2{
+      font-size:1.6rem; font-weight:300;
+      background: linear-gradient(45deg, var(--accent), #ffffff, var(--accent));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent
+    }
+
+    /* reveal on scroll */
+    .reveal{opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease}
+    .reveal.show{opacity:1; transform:translateY(0)}
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .token-grid{grid-template-columns:1fr; gap:22px}
+      .snapshot .cards3{grid-template-columns:1fr 1fr}
+      .contact-links{grid-template-columns:repeat(2,1fr)}
+      .strategy-grid{grid-template-columns:1fr; gap:28px}
+    }
+    @media (max-width: 768px){
+      .hero h1{font-size:2.2rem}
+      .hero .subtitle{font-size:1rem}
+      .hero-buttons{flex-direction:column}
+      .section{padding:68px 0}
+      .cards2{grid-template-columns:1fr}
+      .snapshot .cards3{grid-template-columns:1fr}
+      .contact-links{grid-template-columns:1fr}
+      .funding-circle{width:320px; height:320px; font-size:1rem}
+      .funding-item{min-width:96px; font-size:.72rem}
+      @keyframes orbit{from{ transform: rotate(0deg) translateX(160px) rotate(0deg) } to{ transform: rotate(360deg) translateX(160px) rotate(-360deg) }}
+      .market .handle{height:96px}
+/* 手机端蓝海市场优化 */
+  .ocean-surface {
+    position: static;
+    height: 200px;
+    transform: none !important;
+  }
+  
+  .ocean-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+  
+  .ocean-content p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+  }
+  
+  .ocean-trigger-hint {
+    display: none;
+  }
+  
+  .ocean-badge {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="kicker"><strong>667desci Project</strong></div>
+      <h1>A bridge built by science, transparency, and real action</h1>
+      <p class="subtitle">
+        We do not proclaim miracles. Through reproducible research and verifiable processes, we gather scattered sparks of serendipity and transform them into medical possibilities to be shared by all humanity.
+      </p>
+      <div class="hero-buttons">
+        <a class="btn" href="#mission">Explore Vision</a>
+        <a class="btn btn-outline" href="#contact">Join the Community</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Statement（独立块） -->
+  <section id="mission" class="section mission reveal">
+    <div class="container">
+      <h2 class="section-title">Mission Statement</h2>
+      <p class="section-lead">
+        Since there exists even the faintest spark, we have a responsibility to turn it into an anti-cancer drug that can be shared by all.
+      </p>
+      <p class="quote">
+        We are not merely developing a drug; we are exploring a new model — a virtuous cycle between science and capital, and the meeting point of scientific progress with humanity’s shared destiny.
+      </p>
+    </div>
+  </section>
+
+  <!-- Science-Driven + Blockchain-Transparent（独立块） -->
+  <section id="science" class="section science reveal">
+    <div class="container">
+      <h2 class="section-title">Science-Driven + Blockchain-Transparent</h2>
+      <div class="section-lead" style="margin-bottom:18px">
+        Project 667desci applies rigorous methods to validate the anti-cancer potential of naturally derived compound formulas.
+      </div>
+      <div class="body">
+        <p>All funding, data, and buyback actions are recorded on-chain for transparency and verifiability, while clear, open rules enable seamless collaboration among clinicians, data scientists, molecular biologists, and other disciplines.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market Opportunity - Ocean Wave Effect -->
+  <section id="market" class="section market-ocean reveal">
+    <div class="container">
+      <h2 class="section-title">Market Opportunity</h2>
+      
+      <div class="ocean-showcase" id="oceanShowcase" aria-label="Ocean market showcase">
+        <div class="ocean-trigger-hint">Explore Blue Ocean Market</div>
+        
+        <div class="ocean-surface" aria-hidden="true"></div>
+        
+        <div class="floating-elements" aria-hidden="true">
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+        </div>
+        
+        <div class="market-content-ocean">
+          <div class="ocean-content">
+            <div class="ocean-badge">Blue Ocean · Future Outlook</div>
+            <h3>Market Opportunity</h3>
+            <p>The global anti-cancer drug market exceeds $100 billion annually and continues to expand.</p>
+            <p>More than 60% of approved cancer drugs are derived from natural sources, yet the vast majority are based on single molecules. In contrast, compound formulas and multi-target approaches remain almost entirely unexplored, leaving a massive unmet need and opportunity.</p>
+            <p>Historically, natural compound research has been limited by complex compositions and difficulties in standardization, which made clinical translation rare. Today, however, the landscape is changing: multi-omics integration, systems pharmacology, and artificial intelligence are breaking down these barriers. Combined with blockchain-enabled transparent research, natural compound formulas can now be studied, validated, and industrialized in ways never before possible.</p>
+            <p>This convergence of market demand and technological iteration opens the door for 667desci to capture a unique opportunity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dual-Track Strategy（独立块） -->
+  <section id="strategy" class="section strategy reveal">
+    <div class="container">
+      <h2 class="section-title">Dual-Track Strategy</h2>
+      <p class="section-lead">
+     
+      </p>
+
+      <div class="strategy-grid">
+        <!-- Left: text & accordion -->
+        <div>
+          <div class="callout" id="dual-callout">
+            <button class="accordion-toggle" aria-expanded="false" aria-controls="why-content" id="why-toggle">
+              <span>Why dual-track?</span>
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M5 8.5 L10 13.5 L15 8.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <div id="why-content" class="accordion-content" role="region" aria-labelledby="why-toggle">
+              <div style="padding:6px 2px 0 2px;">
+                Technological progress is unlocking a field once beyond reach, yet the path to pharmaceutical registration remains complex and uncertain. To balance opportunity with stability and ensure that innovation translates into real‑world impact, we adopt a dual‑track development strategy: one track accelerates early cash flow and real‑world validation through health supplements; the other steadily advances toward pharmaceutical registration and clinical trials, building the scientific and regulatory trust required for mainstream medicine. This approach maintains momentum while paving the way for long‑term breakthroughs.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: diagram -->
+        <div class="tracks" aria-label="Dual-track diagram">
+          <div class="line top"></div>
+          <div class="line bottom"></div>
+          <div class="node" style="top:110px; left:40px;"></div>
+          <div class="node" style="top:200px; left:40px;"></div>
+          <div class="badge cash">Cash Flow</div>
+          <div class="badge clinical">Clinical & Registration</div>
+          <div class="label l1">Supplement Path</div>
+          <div class="label l2">Pharmaceutical Path</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dual-Track Exploration（独立块） -->
+  <section id="paths" class="section dual-path reveal">
+    <div class="container">
+      <h2 class="section-title">Dual-Track Exploration</h2>
+      <div class="cards2">
+        <div class="path-card">
+          <h3>Supplement Path · Cash Flow</h3>
+          <ul>
+            <li>Ingredient analysis and standardization for rapid market entry</li>
+            <li>Launch health products to validate direction through real users and real revenue</li>
+            <li>Build cash flow to feed back into research</li>
+            <li>Allocate 10%–15% of profits to token buybacks and burns</li>
+            <li>Market validation driving research forward: user feedback accelerates and grounds scientific progress</li>
+          </ul>
+        </div>
+        <div class="path-card">
+          <h3>Pharmaceutical Path · Clinical Trials and Registration</h3>
+          <ul>
+            <li>Focus on mechanism of action and clinical studies, progressing toward drug registration</li>
+            <li>Build dual trust in science and efficacy across global mainstream markets</li>
+            <li>Mechanism research → Clinical application → Phased clinical trials</li>
+            <li>Post-launch: ongoing buybacks and transparent mechanisms</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Snapshot -->
+  <section id="snapshot" class="section snapshot reveal">
+    <div class="container">
+      <h2 class="section-title" style="color:#fff">Project Snapshot</h2>
+      <div class="cards3">
+        <div class="snap-card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V6M16 20V13M3 20H21"/></svg>
+          </div>
+          <h4>Milestone-Based R&D</h4>
+          <p>Milestone-based R&D progression for controlled risk and clear pacing.</p>
+        </div>
+        <div class="snap-card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 12a8 8 0 0 1 12.9-6.2M21 12a8 8 0 0 1-12.9 6.2"/><path d="M9 4H16V11M15 20H8V13"/></svg>
+          </div>
+          <h4>10%–15% Net Profit Buybacks</h4>
+          <p>10%–15% of net profits allocated to token buybacks and burns, ensuring value return to the community.</p>
+        </div>
+        <div class="snap-card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 12l4-4 5 5 5-5 4 4"/><path d="M7 16l4-4M13 16l4-4"/></svg>
+          </div>
+          <h4>Private Fundraising via SAFT</h4>
+          <p>Private fundraising via SAFT, inviting early partners to co-build long-term consensus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tokenomics -->
+  <section id="tokenomics" class="section tokenomics reveal">
+    <div class="container">
+      <h2 class="section-title">Tokenomics</h2>
+      <div class="token-grid">
+        <div class="donut-wrap">
+          <div class="donut" aria-label="Token allocation donut"></div>
+        </div>
+        <div>
+          <div class="legend">
+            <div class="legend-item">
+              <span class="swatch p1" aria-hidden="true"></span>
+              <div><strong>Private Fundraising (50%)</strong> <span style="display:block">For R&amp;D, registration, and market expansion</span></div>
+            </div>
+            <div class="legend-item">
+              <span class="swatch p2" aria-hidden="true"></span>
+              <div><strong>Research Fund (20%)</strong> <span style="display:block">Milestone-based unlocking tied to transparent deliverables</span></div>
+            </div>
+            <div class="legend-item">
+              <span class="swatch p3" aria-hidden="true"></span>
+              <div><strong>Community Ecosystem (15%)</strong> <span style="display:block">DAO governance and community incentives for genuine contributions</span></div>
+            </div>
+            <div class="legend-item">
+              <span class="swatch p4" aria-hidden="true"></span>
+              <div><strong>Reserve Funds (15%)</strong> <span style="display:block">Ensure steady progress and hedge against risks</span></div>
+            </div>
+          </div>
+          <div class="token-note">
+            <div class="note"><strong>Fixed total token supply</strong></div>
+            <div class="note"><strong>Buyback mechanism:</strong> 10%–15% of net profits from supplements and pharmaceuticals used for buybacks and burns (verifiable on-chain).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use of Funds -->
+  <section id="funding" class="section funding reveal">
+    <div class="container">
+      <h2 class="section-title">Use of Funds</h2>
+      <p class="section-lead">We value every contribution and respond to trust with tangible results. All funds will primarily be used for:</p>
+      <div class="funding-visual">
+        <div class="funding-circle">
+          Research Hub
+          <div class="funding-items" aria-label="Use of funds orbit">
+            <div class="funding-item">Laboratories & Teams</div>
+            <div class="funding-item">Compounds & Mechanisms</div>
+            <div class="funding-item">Supplements & Market</div>
+            <div class="funding-item">Clinical & Compliance</div>
+            <div class="funding-item">Community & Circulation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources & Communication -->
+  <section id="contact" class="section contact reveal">
+    <div class="container">
+      <h2 class="section-title">Resources & Communication</h2>
+      <div class="contact-links">
+        <a class="contact-link" href="https://substack.com/@667desci" target="_blank" rel="noopener">
+          <div class="title">Substack</div>
+          <div class="sub">substack.com/@667desci</div>
+        </a>
+        <a class="contact-link" href="https://twitter.com/667desci" target="_blank" rel="noopener">
+          <div class="title">X / Twitter</div>
+          <div class="sub">@667desci</div>
+        </a>
+        <a class="contact-link" href="https://t.me/DeSci667" target="_blank" rel="noopener">
+          <div class="title">Telegram (Direct Team Contact)</div>
+          <div class="sub">t.me/DeSci667</div>
+        </a>
+        <a class="contact-link" href="mailto:667desci@gmail.com">
+          <div class="title">Email</div>
+          <div class="sub">667desci@gmail.com</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer / Closing Tagline -->
+  <section class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <h2>667desci: A bridge built by science and transparency, turning a glimmer of discovery into a verifiable future.</h2>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        const target=document.querySelector(id);
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'})}
+      })
+    });
+
+    // reveal on scroll
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target) }
+      })
+    },{threshold:.08, rootMargin:'0px 0px -80px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Accordion: "Why dual-track?" — default collapsed
+    (function(){
+      const btn = document.getElementById('why-toggle');
+      const panel = document.getElementById('why-content');
+      panel.style.maxHeight = "0px";
+      btn.addEventListener('click', function(){
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          this.setAttribute('aria-expanded','false');
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          requestAnimationFrame(()=> {
+            panel.style.transition = "max-height .36s cubic-bezier(.2,.9,.2,1)";
+            panel.style.maxHeight = "0px";
+            panel.classList.remove('open');
+          });
+        } else {
+          this.setAttribute('aria-expanded','true');
+          panel.classList.add('open');
+          panel.style.transition = "max-height .36s cubic-bezier(.2,.9,.2,1)";
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          panel.addEventListener('transitionend', function handler(){
+            if (btn.getAttribute('aria-expanded') === 'true') {
+              panel.style.maxHeight = "none";
+            }
+            panel.removeEventListener('transitionend', handler);
+          });
+        }
+      });
+      panel.addEventListener('keydown', function(e){
+        if(e.key === "Escape"){
+          if (btn.getAttribute('aria-expanded') === 'true') {
+            btn.click();
+            btn.focus();
+          }
+        }
+      });
+    })();
+
+    // Ocean Wave Market Opportunity
+(function(){
+  const oceanShowcase = document.getElementById('oceanShowcase');
+  
+  // 检查是否为手机端
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+  
+  // 手机端自动展开内容
+  function handleResize() {
+    if (isMobile()) {
+      oceanShowcase.classList.add('revealed');
+    } else {
+      // 桌面端可以点击切换
+      if (oceanShowcase) {
+        oceanShowcase.addEventListener('click', function() {
+          this.classList.toggle('revealed');
+        });
+      }
+    }
+  }
+  
+  if (oceanShowcase) {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+  }
+})();
+  </script>
+</body>
+</html>
